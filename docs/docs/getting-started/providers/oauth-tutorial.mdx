@@ -198,13 +198,15 @@ npm install @auth/core @auth/sveltekit
 Create the following [Server hook](https://kit.svelte.dev/docs/hooks) file. This route contains the necessary configuration for Auth.js, as well as the dynamic route handler:
 
 ```ts title="src/hooks.server.ts"
-import { SvelteKitAuth } from "@auth/sveltekit"
-import GitHub from "@auth/core/providers/github"
-import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
+import { SvelteKitAuth } from "@auth/sveltekit";
+import GitHub from "@auth/core/providers/github";
+import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private";
 
-export const handle = SvelteKitAuth({
+const auth = SvelteKitAuth({
   providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })],
-})
+});
+
+export const handle = auth.handle;
 ```
 
 :::info
